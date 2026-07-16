@@ -5,7 +5,7 @@ name: Deploy GitHub Pages
 
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 # Permissões necessárias para publicar no Pages
 permissions:
