@@ -5,19 +5,117 @@
     <meta charset="UTF-8">
     <!-- 📱 Faz o site funcionar bem em celulares -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 🎨 Arquivo de estilos (CSS) -->
+    <!-- 🎨 Arquivo de estilos -->
     <link rel="stylesheet" href="css/style.css">
-    <!-- 🎨 Biblioteca de ícones (play, pause, setas...) -->
+    <!-- 🎨 Biblioteca de ícones -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Music Hub</title>
+
+    <!--
+      ⚡ ESTILOS CRÍTICOS DO LOADER — ficam aqui no <head> propositalmente.
+         O CSS externo (style.css) só carrega depois do HTML ser interpretado,
+         então sem isso o loader apareceria sem estilo por um instante (FOUC).
+         Com este bloco inline o loader já nasce estilizado.
+    -->
+    <style>
+        /* Esconde a página enquanto o loader está visível */
+        body { margin: 0; overflow: hidden; }
+
+        /* Overlay que cobre 100% da tela */
+        #loader {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 9999;
+            background: url("img/fundo.png") no-repeat center center / cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.7s ease;
+        }
+
+        /* Camada escura + blur por cima da imagem */
+        #loader::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        /* Conteúdo acima da camada escura */
+        .loader-content {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Logo */
+        .loader-logo {
+            color: #fff;
+            font-size: 30px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            margin: 0;
+        }
+        .loader-logo span { color: rgb(255,113,66); }
+
+        /* "A carregar..." */
+        .loader-text {
+            color: rgba(255,255,255,0.55);
+            font-size: 13px;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+        /* Container das barras */
+        .equalizer {
+            display: flex;
+            align-items: flex-end;
+            gap: 6px;
+            height: 40px;
+        }
+
+        /* Cada barra */
+        .equalizer span {
+            display: block;
+            width: 6px;
+            height: 6px;
+            border-radius: 3px;
+            background: rgb(255,113,66);
+            animation: equalize 1s ease-in-out infinite;
+        }
+
+        /* Delays diferentes → efeito de onda */
+        .equalizer span:nth-child(1) { animation-delay: 0.0s; }
+        .equalizer span:nth-child(2) { animation-delay: 0.2s; }
+        .equalizer span:nth-child(3) { animation-delay: 0.4s; }
+        .equalizer span:nth-child(4) { animation-delay: 0.2s; }
+        .equalizer span:nth-child(5) { animation-delay: 0.0s; }
+
+        @keyframes equalize {
+            0%, 100% { height: 6px;  opacity: 0.4; }
+            50%       { height: 38px; opacity: 1;   }
+        }
+
+        /* Classe adicionada pelo JS para iniciar o fade-out */
+        #loader.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- ⏳ LOADING SCREEN — aparece até a página carregar completamente -->
+    <!-- ⏳ LOADING SCREEN — aparece até window.load disparar -->
     <div id="loader">
         <div class="loader-content">
             <p class="loader-logo">Music <span>Hub</span></p>
-            <!-- 🎚️ Barras de equalizador animadas -->
+            <!-- 🎚️ Barras do equalizador animadas -->
             <div class="equalizer">
                 <span></span>
                 <span></span>
@@ -34,7 +132,6 @@
 
         <!-- 📌 Header fixo no topo com logo e menu -->
         <header>
-            <!-- 🏷️ Logo clicável -->
             <a href="" class="logo">Music <span>Hub</span></a>
 
             <!-- 🍔 Botão hambúrguer — só aparece no mobile -->
@@ -71,13 +168,12 @@
 
                     <!-- 🏷️ Informações da música atual -->
                     <div class="song-info">
-                        <p class="song-title" id="songTitle">Musica</p>
+                        <p class="song-title" id="songTitle">Little Waltz</p>
                         <p class="song-index" id="songIndex">1 / 3</p>
                     </div>
 
                     <!-- 📊 Barra de progresso + tempo -->
                     <div class="progress-wrapper">
-                        <!-- Clique na barra para saltar no tempo -->
                         <div class="progress-container" id="progressContainer">
                             <div class="progress-bar" id="progressBar"></div>
                         </div>
