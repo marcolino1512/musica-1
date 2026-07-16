@@ -2,7 +2,98 @@
    🎨 MUSIC HUB — Estilos Globais
    ============================================================ */
 
-/* 🔄 Reset: remove margens e paddings padrão do navegador */
+/* ============================================================
+   ⏳ LOADING SCREEN — tela de carregamento
+   ============================================================ */
+
+/* Overlay que cobre tudo enquanto a página carrega */
+#loader {
+    position: fixed;
+    inset: 0;                        /* ocupa 100% da tela */
+    z-index: 9999;                   /* fica na frente de tudo */
+    background: url("../img/fundo.png") no-repeat center center / cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.7s ease;   /* fade suave ao sair */
+}
+
+/* Camada escura + blur sobre o fundo (igual ao .wrapper) */
+#loader::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(6px);
+}
+
+/* Conteúdo centralizado (fica acima do ::before) */
+.loader-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+/* Logo igual ao header */
+.loader-logo {
+    color: white;
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: 4px;
+}
+
+.loader-logo span {
+    color: rgb(255, 113, 66);
+}
+
+/* Texto "A carregar..." */
+.loader-text {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+/* ── Barras do equalizador ── */
+.equalizer {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    height: 40px;
+}
+
+/* Cada barra */
+.equalizer span {
+    display: block;
+    width: 6px;
+    border-radius: 3px;
+    background: rgb(255, 113, 66);
+    animation: equalize 1s ease-in-out infinite;
+}
+
+/* Alturas e delays diferentes para cada barra — cria o efeito de onda */
+.equalizer span:nth-child(1) { animation-delay: 0.0s; }
+.equalizer span:nth-child(2) { animation-delay: 0.2s; }
+.equalizer span:nth-child(3) { animation-delay: 0.4s; }
+.equalizer span:nth-child(4) { animation-delay: 0.2s; }
+.equalizer span:nth-child(5) { animation-delay: 0.0s; }
+
+/* Barra sobe de 6px até 38px e volta */
+@keyframes equalize {
+    0%, 100% { height: 6px;  opacity: 0.5; }
+    50%       { height: 38px; opacity: 1;   }
+}
+
+/* Classe adicionada pelo JS quando a página termina de carregar */
+#loader.fade-out {
+    opacity: 0;
+    pointer-events: none; /* evita cliques durante o fade */
+}
+
+/* ============================================================
+   🔄 Reset: remove margens e paddings padrão do navegador
+   ============================================================ */
 * {
     padding: 0;
     margin: 0;

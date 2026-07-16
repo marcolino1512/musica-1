@@ -156,6 +156,18 @@ nav.querySelectorAll('a').forEach(link => {
 });
 
 // ──────────────────────────────────────────
+// ⏳ Loading screen — remove quando a página
+//    terminar de carregar (imagens, áudio, etc.)
+// ──────────────────────────────────────────
+window.addEventListener('load', () => {
+    const loader = document.getElementById('loader');
+    // Pequeno delay para a animação não cortar de repente
+    setTimeout(() => loader.classList.add('fade-out'), 400);
+    // Remove do DOM após o fade terminar (0.7s no CSS)
+    loader.addEventListener('transitionend', () => loader.remove());
+});
+
+// ──────────────────────────────────────────
 // 🚀 Inicializa: carrega a primeira música
 // ──────────────────────────────────────────
 loadSong(currentIndex);
