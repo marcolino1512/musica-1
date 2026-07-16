@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <!-- 🔤 Codificação de caracteres (acentos, etc.) -->
+    <meta charset="UTF-8">
+    <!-- 📱 Faz o site funcionar bem em celulares -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 🎨 Arquivo de estilos (CSS) -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- 🎨 Biblioteca de ícones (play, pause, setas...) -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Music Hub</title>
+</head>
+<body>
+
+    <!-- 🏠 Wrapper: envolve toda a página com o efeito de blur -->
+    <div class="wrapper">
+
+        <!-- 📌 Header fixo no topo com logo e menu -->
+        <header>
+            <!-- 🏷️ Logo clicável -->
+            <a href="" class="logo">Music <span>Hub</span></a>
+
+            <!-- 🍔 Botão hambúrguer — só aparece no mobile -->
+            <button class="menu-toggle" id="menuToggle">
+                <i class='bx bx-menu'></i>
+            </button>
+
+            <!-- 🔗 Menu de navegação -->
+            <nav id="nav">
+                <ul>
+                    <li><a href="#">MUSICS</a></li>
+                    <li><a href="#">HIT</a></li>
+                    <li><a href="#">PODCASTS</a></li>
+                    <li><a href="#">NEW RELEASES</a></li>
+                    <li><a href="#">YOUR LIBRARY</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- 📐 Área principal: texto | fone | player -->
+        <div class="content">
+
+            <!-- 📝 Coluna esquerda: título da página -->
+            <div class="left-col">
+                <h1>FEEL THE<br><span>MUSIC</span></h1>
+            </div>
+
+            <!-- 🎧 Imagem do fone de ouvido (centro) -->
+            <img src="img/som.png" class="headphone" alt="Headphone">
+
+            <!-- 🎵 Coluna direita: card do player -->
+            <div class="right-col">
+                <div class="player-card">
+
+                    <!-- 🏷️ Informações da música atual -->
+                    <div class="song-info">
+                        <p class="song-title" id="songTitle">Musica</p>
+                        <p class="song-index" id="songIndex">1 / 3</p>
+                    </div>
+
+                    <!-- 📊 Barra de progresso + tempo -->
+                    <div class="progress-wrapper">
+                        <!-- Clique na barra para saltar no tempo -->
+                        <div class="progress-container" id="progressContainer">
+                            <div class="progress-bar" id="progressBar"></div>
+                        </div>
+                        <!-- ⏱️ Tempo atual / Duração total -->
+                        <div class="time-info">
+                            <span id="currentTime">0:00</span>
+                            <span id="duration">0:00</span>
+                        </div>
+                    </div>
+
+                    <!-- 🎮 Botões de controle -->
+                    <div class="controls">
+                        <!-- ⏮️ Música anterior -->
+                        <button class="ctrl-btn" id="prevBtn" title="Anterior">
+                            <i class='bx bx-skip-previous'></i>
+                        </button>
+                        <!-- ▶️⏸️ Play / Pause -->
+                        <button class="ctrl-btn play-btn" id="playBtn" title="Play / Pause">
+                            <i class='bx bx-play' id="playIcon"></i>
+                        </button>
+                        <!-- ⏭️ Próxima música -->
+                        <button class="ctrl-btn" id="nextBtn" title="Próximo">
+                            <i class='bx bx-skip-next'></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 🔊 Elemento de áudio invisível controlado pelo JavaScript -->
+    <audio id="audio"></audio>
+
+    <!-- ⚙️ Lógica do player -->
+    <script src="js/player.js"></script>
+
+</body>
+</html>

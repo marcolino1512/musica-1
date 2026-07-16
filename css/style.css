@@ -1,0 +1,414 @@
+/* ============================================================
+   🎨 MUSIC HUB — Estilos Globais
+   ============================================================ */
+
+/* 🔄 Reset: remove margens e paddings padrão do navegador */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* 🖼️ Fundo de tela cheia com imagem fixa */
+body {
+    background: url("../img/fundo.png") no-repeat center center fixed;
+    min-height: 100vh;
+    background-size: cover;
+}
+
+/* 🌫️ Camada semitransparente sobre o fundo (blur + overlay) */
+.wrapper {
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgba(150, 150, 150, 0.182);
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================================
+   📌 HEADER — Barra de navegação fixa no topo
+   ============================================================ */
+header {
+    position: fixed;     /* 📌 gruda no topo ao rolar a página */
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 10%;
+    z-index: 100;        /* 🔝 fica acima de todos os outros elementos */
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px);
+}
+
+/* 🏷️ Logo "Music Hub" */
+.logo {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 28px;
+    letter-spacing: 3px;
+    transition: 0.3s ease;
+    flex-shrink: 0;
+}
+
+/* 🟠 Palavra "Hub" em laranja */
+.logo span {
+    color: rgb(255, 113, 66);
+}
+
+.logo:hover {
+    transform: scale(1.08);
+}
+
+/* 🔗 Links do menu */
+header nav ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 2.5em;
+}
+
+header nav ul a {
+    color: white;
+    text-decoration: none;
+    letter-spacing: 1px;
+    font-size: 14px;
+    transition: 0.3s ease;
+    border-bottom: 3px solid transparent;
+    padding-bottom: 2px;
+}
+
+/* 🟠 Sublinhado laranja ao passar o mouse */
+header nav ul a:hover {
+    transform: scale(1.15);
+    border-bottom: 3px solid rgb(255, 113, 66);
+}
+
+/* 🍔 Botão hambúrguer — escondido no desktop, aparece no mobile */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* ============================================================
+   🎈 ANIMAÇÃO — Fone de ouvido flutuando suavemente
+   Sobe e desce 12px em 3 segundos, repetindo para sempre
+   ============================================================ */
+@keyframes float {
+    0%   { transform: translateY(0px); }
+    50%  { transform: translateY(-14px); }
+    100% { transform: translateY(0px); }
+}
+
+/* ============================================================
+   📐 CONTENT — Área principal com 3 colunas
+   ============================================================ */
+.content {
+    flex: 1;  /* 🔼 ocupa o espaço restante da tela */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 110px 10% 40px; /* 110px de top para não ficar atrás do header fixo */
+    gap: 30px;
+}
+
+/* ============================================================
+   📝 LEFT COL — Texto "FEEL THE MUSIC"
+   ============================================================ */
+.left-col h1 {
+    font-size: 42px;
+    color: white;
+    line-height: 54px;
+}
+
+/* 🟠 Palavra "MUSIC" em laranja */
+.left-col span {
+    color: rgb(255, 113, 66);
+}
+
+/* ============================================================
+   🎧 HEADPHONE — Imagem central do fone de ouvido
+   A animação float faz ele subir e descer suavemente o tempo todo
+   ============================================================ */
+.headphone {
+    width: 240px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 20px rgba(255, 113, 66, 0.3)); /* 🟠 brilho laranja */
+    animation: float 3s ease-in-out infinite;              /* 🎈 flutua para sempre */
+}
+
+/* Ao passar o mouse, intensifica o brilho laranja */
+.headphone:hover {
+    filter: drop-shadow(0 0 32px rgba(255, 113, 66, 0.65));
+}
+
+/* ============================================================
+   🎵 PLAYER CARD — Card do player de música
+   ============================================================ */
+.right-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* 💳 Card com efeito de vidro fosco (glassmorphism) */
+.player-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 22px;
+    padding: 28px 30px;
+    width: 290px;
+    text-align: center;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* 🏷️ Nome da música */
+.song-info {
+    margin-bottom: 22px;
+}
+
+.song-title {
+    color: white;
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    white-space: nowrap;     /* evita quebra de linha */
+    overflow: hidden;
+    text-overflow: ellipsis; /* ... se o nome for longo */
+}
+
+/* 🔢 Contador "1 / 2" */
+.song-index {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+/* ============================================================
+   📊 BARRA DE PROGRESSO
+   ============================================================ */
+.progress-wrapper {
+    margin-bottom: 22px;
+}
+
+/* 📏 Trilha cinza de fundo */
+.progress-container {
+    width: 100%;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    cursor: pointer; /* 🖱️ indica que é clicável */
+    margin-bottom: 8px;
+    position: relative;
+}
+
+/* 🟠 Barra laranja que cresce conforme a música toca */
+.progress-bar {
+    height: 100%;
+    background: rgb(255, 113, 66);
+    border-radius: 10px;
+    width: 0%;
+    transition: width 0.15s linear;
+    position: relative;
+    pointer-events: none; /* clique passa para o container */
+}
+
+/* ⚪ Bolinha que aparece ao passar o mouse na barra */
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    right: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.progress-container:hover .progress-bar::after {
+    opacity: 1;
+}
+
+/* ⏱️ Tempo atual e duração total */
+.time-info {
+    display: flex;
+    justify-content: space-between;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 11px;
+}
+
+/* ============================================================
+   🎮 BOTÕES DE CONTROLE
+   ============================================================ */
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+}
+
+/* Botões ⏮️ e ⏭️ */
+.ctrl-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2.1rem;
+    cursor: pointer;
+    transition: 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    line-height: 1;
+}
+
+.ctrl-btn:hover {
+    color: rgb(255, 113, 66);
+    transform: scale(1.12);
+}
+
+/* 🟠 Botão Play/Pause — círculo laranja no centro */
+.play-btn {
+    background: rgb(255, 113, 66);
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    font-size: 1.9rem;
+    color: white;
+}
+
+.play-btn:hover {
+    background: rgb(235, 90, 40);
+    color: white;
+    transform: scale(1.1);
+}
+
+/* ============================================================
+   📱 RESPONSIVIDADE — Adaptações por tamanho de tela
+   ============================================================ */
+
+/* 💻 Telas médias (notebook pequeno) */
+@media (max-width: 1100px) {
+    header {
+        padding: 1em 5%;
+    }
+    header nav ul {
+        gap: 1.8em;
+    }
+    .content {
+        padding: 110px 5% 40px;
+    }
+}
+
+/* 📱 Tablet — layout vira coluna vertical */
+@media (max-width: 860px) {
+    .content {
+        flex-direction: column;    /* 🔽 empilha os elementos */
+        align-items: center;
+        justify-content: center;
+        padding-top: 90px;
+        gap: 24px;
+    }
+    .left-col {
+        text-align: center;
+    }
+    .left-col h1 {
+        font-size: 36px;
+        line-height: 46px;
+    }
+    .headphone {
+        width: 180px;
+    }
+}
+
+/* 📱 Mobile — menu hambúrguer */
+@media (max-width: 768px) {
+    header {
+        padding: 1em 6%;
+    }
+    /* 🍔 Mostra o botão hambúrguer */
+    .menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    /* 🗂️ Menu ocupa a tela toda quando aberto */
+    #nav {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.92);
+        backdrop-filter: blur(12px);
+        z-index: 99;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    #nav.open {
+        display: flex; /* 👁️ abre quando tem a classe .open */
+    }
+    #nav ul {
+        flex-direction: column;
+        gap: 2.5em;
+        text-align: center;
+    }
+    #nav ul a {
+        font-size: 18px;
+        letter-spacing: 2px;
+    }
+    .content {
+        padding-top: 80px;
+        gap: 20px;
+    }
+    .left-col h1 {
+        font-size: 30px;
+        line-height: 40px;
+    }
+    .headphone {
+        width: 150px;
+    }
+    .player-card {
+        width: 270px;
+        padding: 24px 22px;
+    }
+}
+
+/* 📱 Celular pequeno */
+@media (max-width: 420px) {
+    .logo {
+        font-size: 22px;
+    }
+    .left-col h1 {
+        font-size: 26px;
+        line-height: 36px;
+    }
+    .headphone {
+        width: 130px;
+    }
+    .player-card {
+        width: 248px;
+        padding: 20px 18px;
+    }
+    .play-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.7rem;
+    }
+}
