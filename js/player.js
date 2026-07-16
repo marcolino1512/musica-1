@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         loader.classList.add('fade-out');          // inicia transição de opacidade
         setTimeout(() => loader.remove(), 750);   // remove do DOM após o fade (0.7s)
-    }, 1500);
+    }, 2500);
 });
 
 // ──────────────────────────────────────────
