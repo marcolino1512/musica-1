@@ -156,15 +156,25 @@ nav.querySelectorAll('a').forEach(link => {
 });
 
 // ──────────────────────────────────────────
-// ⏳ Loading screen — remove quando a página
-//    terminar de carregar (imagens, áudio, etc.)
+// ⏳ Loading screen
+//
+// Problema com window.load: espera os ficheiros MP3
+// carregarem (6 MB+), o que pode nunca acontecer em
+// ligações lentas → loader infinito.
+//
+// Solução: DOMContentLoaded (dispara assim que o HTML
+// é lido) + tempo mínimo de 1.5s para o loader não
+// piscar em ligações rápidas.
 // ──────────────────────────────────────────
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
     const loader = document.getElementById('loader');
-    // Pequeno delay para a animação não cortar de repente
-    setTimeout(() => loader.classList.add('fade-out'), 400);
-    // Remove do DOM após o fade terminar (0.7s no CSS)
-    loader.addEventListener('transitionend', () => loader.remove());
+    if (!loader) return;
+
+    // Mostra o loader pelo menos 1.5 s, depois faz fade-out
+    setTimeout(() => {
+        loader.classList.add('fade-out');          // inicia transição de opacidade
+        setTimeout(() => loader.remove(), 750);   // remove do DOM após o fade (0.7s)
+    }, 1500);
 });
 
 // ──────────────────────────────────────────

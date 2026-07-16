@@ -207,7 +207,8 @@
     </div>
 
     <!-- 🔊 Elemento de áudio invisível controlado pelo JavaScript -->
-    <audio id="audio"></audio>
+    <!-- preload="none" impede o browser de pré-carregar o MP3 ao iniciar -->
+    <audio id="audio" preload="none"></audio>
 
     <!-- ⚙️ Lógica do player -->
     <script src="js/player.js"></script>
